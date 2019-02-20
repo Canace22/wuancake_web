@@ -12,7 +12,9 @@
       </el-form-item>
       <el-form-item prop="password">
         <el-input :type="type" v-model="formData.password" placeholder="密码"></el-input>
-        <span @click="change" class="iconView"><i class="el-icon-view"></i></span>
+        <span @click="change" class="iconView">
+          <i class="el-icon-view"></i>
+        </span>
       </el-form-item>
       <el-form-item prop="passwordT">
         <el-input type="password" v-model="formData.passwordT" placeholder="确认密码"></el-input>
@@ -24,114 +26,108 @@
 </template>
 
 <script>
-import { login } from '../../api'
-import { mapMutations } from 'vuex'
+import { login } from "@/api";
+import { mapMutations } from "vuex";
 
 export default {
-  name: 'Login',
-  data () {
-    var checkPassword = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
+  name: "Login",
+  data() {
+    const checkPassword = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
       } else if (value !== this.formData.password) {
-        callback(new Error('两次输入密码不一致'))
+        callback(new Error("两次输入密码不一致"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     return {
-      type: 'password',
+      type: "password",
       formData: {
-        userName: '',
-        email: '',
+        userName: "",
+        email: "",
         QQ: null,
-        password: '',
-        passwordT: ''
+        password: "",
+        passwordT: ""
       },
       rules: {
         userName: [
-          { required: true, message: '用户名不能为空', trigger: 'blur' }
+          { required: true, message: "用户名不能为空", trigger: "blur" }
         ],
-        email: [
-          { required: true, message: '邮箱为必填项', trigger: 'blur' }
-        ],
-        QQ: [
-          { required: true, message: 'QQ 为必填项', trigger: 'blur' }
-        ],
+        email: [{ required: true, message: "邮箱为必填项", trigger: "blur" }],
+        QQ: [{ required: true, message: "QQ 为必填项", trigger: "blur" }],
         password: [
-          { required: true, message: '密码为必填项', trigger: 'blur' }
+          { required: true, message: "密码为必填项", trigger: "blur" }
         ],
-        passwordT: [
-          { validator: checkPassword, trigger: 'blur' }
-        ]
+        passwordT: [{ validator: checkPassword, trigger: "blur" }]
       }
-    }
+    };
   },
   methods: {
-    submit () {
+    submit() {
       this.$refs.loginForm.validate(val => {
-        const { userName, email, QQ, password } = this.formData
+        const { userName, email, QQ, password } = this.formData;
         let params = {
           userName,
           email,
           QQ,
           password
-        }
+        };
         if (val) {
           login(params).then(res => {
-            if (res.infoCode === 200 || res.infoCode === '200') {
+            if (res.infoCode === 200 || res.infoCode === "200") {
               this.$message({
-                message: '恭喜你，注册成功！',
-                type: 'success'
-              })
+                message: "恭喜你，注册成功！",
+                type: "success"
+              });
               this.setUserInfo({
                 user_id: res.userId,
                 group_id: res.groupId,
                 user_name: res.userName,
                 email: this.formData.email
-              })
-              this.$router.push({ path: '/group' })
+              });
+              this.$router.push({ path: "/group" });
             } else {
               this.$notify.error({
-                title: '注册失败',
+                title: "注册失败",
                 message: res.infoText
-              })
+              });
             }
-          })
+          });
         } else {
           this.$message({
-            message: '不能提交！请检查表单后重试！',
-            type: 'warning'
-          })
+            message: "不能提交！请检查表单后重试！",
+            type: "warning"
+          });
         }
-      })
+      });
     },
-    change () {
-      if (this.type === 'password') {
-        this.type = 'text'
+    change() {
+      if (this.type === "password") {
+        this.type = "text";
       } else {
-        this.type = 'password'
+        this.type = "password";
       }
     },
-    to () {
-      this.$router.push({ path: '/log' })
+    to() {
+      this.$router.push({ path: "/log" });
     },
     ...mapMutations({
-      setUserInfo: 'SET_USER_INFO'
+      setUserInfo: "SET_USER_INFO"
     })
   }
-}
+};
 </script>
 
 <style scoped>
-.login{
+.login {
   display: flex;
   height: 100%;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('/static/img/background.png');
+  background-image: url("/static/img/background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

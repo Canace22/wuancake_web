@@ -1,76 +1,84 @@
 <template>
   <div class="group">
     <div class="group-main">
-      <group-item v-for="item in groups" :key="item.id" :data="item" :activeNumber="activeNumber" @select="select"></group-item>
+      <group-item
+        v-for="item in groups"
+        :key="item.id"
+        :data="item"
+        :activeNumber="activeNumber"
+        @select="select"
+      ></group-item>
     </div>
-    <span class="group-info"><i class="el-icon-info"></i> 警告：只能选择一次分组，请谨慎选择！</span>
+    <span class="group-info">
+      <i class="el-icon-info"></i> 警告：只能选择一次分组，请谨慎选择！
+    </span>
     <button @click="submit" class="submit">提交</button>
   </div>
 </template>
 
 <script>
-import groupItem from './groupItem'
-import { mapState, mapMutations } from 'vuex'
-import { saveGroup } from '../../api'
+import groupItem from "./groupItem";
+import { mapState, mapMutations } from "vuex";
+import { saveGroup } from "@/api";
 
 export default {
-  name: 'group',
+  name: "group",
   components: {
-    'group-item': groupItem
+    "group-item": groupItem
   },
-  data () {
+  data() {
     return {
       activeNumber: 0
-    }
+    };
   },
   computed: {
-    ...mapState(['groups', 'user_info'])
+    ...mapState(["groups", "user_info"])
   },
   methods: {
-    select (val) {
-      this.activeNumber = val
+    select(val) {
+      this.activeNumber = val;
     },
-    submit () {
+    submit() {
       if (this.activeNumber === 0) {
         this.$message({
-          message: '请选择分组后再提交！',
-          type: 'warning'
-        })
+          message: "请选择分组后再提交！",
+          type: "warning"
+        });
       } else {
         saveGroup({
           userId: this.user_info.user_id,
           groupId: this.activeNumber
         }).then(res => {
-          if (res.infoCode === 200 || res.infoCode === '200') {
+          if (res.infoCode === 200 || res.infoCode === "200") {
             this.$notify.success({
-              title: '提交成功',
+              title: "提交成功",
               message: res.infoText
-            })
-            let name = null
+            });
+            let name = null;
             this.groups.forEach(element => {
               if (element.id === res.groupId) {
-                name = element.groupName
+                name = element.groupName;
               }
-            })
+            });
             this.setUserInfo({
               group_id: res.groupId,
               group_name: name
-            })
-            this.$router.push({ path: '/' })
+            });
+            this.$router.push({ path: "/" });
           } else {
             this.$notify.error({
-              title: '提交失败',
+              title: "提交失败",
               message: res.infoText
-            })
+            });
           }
-        })
+        });
       }
     },
     ...mapMutations({
-      setUserInfo: 'SET_USER_INFO'
+      setUserInfo: "SET_USER_INFO"
     })
   }
-}
+};
 </script>
 
 <style scoped>

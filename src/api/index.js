@@ -1,20 +1,20 @@
-import fetch from '../utils/fetch'
+import fetch from '@/utils/fetch'
 
-export function test () {
+export function test() {
   return fetch({
     url: '/',
     method: 'get'
   })
 }
 
-export function getGroupsInfo () { // 获取分组信息
+export function getGroupsInfo() { // 获取分组信息
   return fetch({
     url: '/findAllGroupInfo',
     method: 'post'
   })
 }
 
-export function getWeeklyStatus (uid) { // 获取周报状态
+export function getWeeklyStatus(uid) { // 获取周报状态
   const data = {
     userId: uid
   }
@@ -25,7 +25,7 @@ export function getWeeklyStatus (uid) { // 获取周报状态
   })
 }
 
-export function applyLeave (params) { // 申请请假
+export function applyLeave(params) { // 申请请假
   const data = params
   return fetch({
     url: '/leave',
@@ -34,7 +34,7 @@ export function applyLeave (params) { // 申请请假
   })
 }
 
-export function cancelLeave (params) { // 取消请假
+export function cancelLeave(params) { // 取消请假
   const data = params
   return fetch({
     url: '/cancelLeave',
@@ -43,7 +43,7 @@ export function cancelLeave (params) { // 取消请假
   })
 }
 
-export function saveGroup (params) { // 保存分组信息
+export function saveGroup(params) { // 保存分组信息
   const data = params
   return fetch({
     url: '/group',
@@ -52,7 +52,7 @@ export function saveGroup (params) { // 保存分组信息
   })
 }
 
-export function recoverPassword (params) { // 找回密码
+export function recoverPassword(params) { // 找回密码
   const data = params
   return fetch({
     url: '/forget',
@@ -60,7 +60,7 @@ export function recoverPassword (params) { // 找回密码
     data: data
   })
 }
-export function changeNickName (params) { // 设置
+export function changeNickName(params) { // 设置
   const data = params
   return fetch({
     url: '/updateUserName',
@@ -69,7 +69,7 @@ export function changeNickName (params) { // 设置
   })
 }
 
-export function saveWeekly (params) { // 保存周报
+export function saveWeekly(params) { // 保存周报
   return fetch({
     url: '/submit',
     method: 'post',
@@ -77,7 +77,7 @@ export function saveWeekly (params) { // 保存周报
   })
 }
 
-export function login (params) { // 注册
+export function login(params) { // 注册
   return fetch({
     url: '/regist',
     method: 'post',
@@ -85,7 +85,7 @@ export function login (params) { // 注册
   })
 }
 
-export function log (params) {
+export function log(params) {
   return fetch({
     url: '/login',
     method: 'post',
@@ -93,7 +93,7 @@ export function log (params) {
   })
 }
 
-export function weeklys (params) { // 获取周报列表
+export function weeklys(params) { // 获取周报列表
   return fetch({
     url: '/myweekly',
     method: 'post',
@@ -101,7 +101,7 @@ export function weeklys (params) { // 获取周报列表
   })
 }
 
-export function quitGroup (params) { // 退出分组接口
+export function quitGroup(params) { // 退出分组接口
   return fetch({
     url: '/quitGroup',
     method: 'post',
@@ -109,7 +109,7 @@ export function quitGroup (params) { // 退出分组接口
   })
 }
 
-export function updatePassword (params) { // 修改密码接口
+export function updatePassword(params) { // 修改密码接口
   return fetch({
     url: '/updatePassword',
     method: 'post',
