@@ -57,7 +57,7 @@ const store = new Vuex.Store({
   actions: {
     async setGroups ({ commit }) {
       let arr = null
-      if (!local.getItem('groups')) {
+      if (local.getItem('groups') === 'null') {
         const groups = await getGroupsInfo()
         arr = groups.groups
       } else {

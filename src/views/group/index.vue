@@ -16,7 +16,7 @@ import { saveGroup } from '../../api'
 export default {
   name: 'group',
   components: {
-    'group-item': groupItem
+    groupItem
   },
   data () {
     return {
@@ -25,6 +25,10 @@ export default {
   },
   computed: {
     ...mapState(['groups', 'user_info'])
+  },
+  created () {
+    console.log('at group')
+    console.log('group:', this.group)
   },
   methods: {
     select (val) {

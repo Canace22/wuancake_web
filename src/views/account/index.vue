@@ -3,20 +3,23 @@
     <div class="set-group-content">
       <p>
         <label>昵称: </label>
-        <input v-model="nickName" type="text" :placeholder="user_info.user_name"/>
+        <input
+          v-model="nickName"
+          type="text"
+          :placeholder="user_info.user_name"
+        />
       </p>
       <p>
         <label>邮箱：</label>
         <span>{{ user_info.email }}</span>
-        <!-- <span>1412759770@qq.com</span> -->
       </p>
       <p>
         <label>分组：</label>
         <span>{{ user_info.group_name }}</span>
       </p>
       <p>
-      <label>密码：</label>
-      <button @click="changePassword">修改</button>
+        <label>密码：</label>
+        <button @click="changePassword">修改</button>
       </p>
       <p class="right-button" @click="changeInfo"><button>更改设置</button></p>
       <p @click="exit" class="exit">>>退出分组</p>
@@ -97,7 +100,7 @@ export default {
   margin-top: 10%;
 }
 .set-group-content .exit:hover {
-  color:#0565fe;
+  color: #0565fe;
 }
 .set-group-content .right-button {
   font-size: 14px;

@@ -10,7 +10,7 @@ export function test () {
 export function getGroupsInfo () { // 获取分组信息
   return fetch({
     url: '/findAllGroupInfo',
-    method: 'post'
+    method: 'get'
   })
 }
 

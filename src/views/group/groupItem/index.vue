@@ -18,6 +18,9 @@ export default {
       required: true
     }
   },
+  created () {
+    console.log(111)
+  },
   methods: {
     select () {
       this.$emit('select', this.data.id)
