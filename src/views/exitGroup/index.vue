@@ -16,44 +16,43 @@
 </template>
 
 <script>
-import { quitGroup } from "../../api";
-import { mapState, mapMutations } from "vuex";
+import { quitGroup } from '../../api'
+import { mapState, mapMutations } from 'vuex'
 export default {
-  name: "exitGroup",
-  data() {
-    return {};
+  name: 'exitGroup',
+  data () {
+    return {}
   },
   computed: {
-    ...mapState(["user_info"])
+    ...mapState(['user_info'])
   },
   methods: {
     ...mapMutations({
-      quitGroupF: "QUIT_GROUP"
+      quitGroupF: 'QUIT_GROUP'
     }),
-    quit() {
+    quit () {
       quitGroup({
         id: this.user_info.user_id
       }).then(res => {
-        console.log(res);
-        if (res.infoCode === 200 || res.infoCode === "200") {
+        if (res.infoCode === 200 || res.infoCode === '200') {
           this.$message({
-            message: "退出分组成功！",
-            type: "success"
-          });
-          this.quitGroupF();
+            message: '退出分组成功！',
+            type: 'success'
+          })
+          this.quitGroupF()
           this.$router.push({
-            path: "/log"
-          });
+            path: '/log'
+          })
         } else {
           this.$message({
-            message: "退出分组失败！",
-            type: "error"
-          });
+            message: '退出分组失败！',
+            type: 'error'
+          })
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>
